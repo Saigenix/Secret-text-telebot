@@ -1,7 +1,7 @@
 from cryptography.fernet import Fernet
 import telebot
 
-API_KEY = "your key here"
+API_KEY = "5007632924:AAHXuUj6hO83BcdB2q8h4RdKqiF2K9aI5m8"
 
 print ("bot started")
 
