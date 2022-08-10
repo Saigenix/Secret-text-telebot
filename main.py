@@ -1,7 +1,10 @@
 from cryptography.fernet import Fernet
+from boto.s3.connection import S3Connection
+
 import telebot
 
-API_KEY = "5007632924:AAHXuUj6hO83BcdB2q8h4RdKqiF2K9aI5m8"
+
+API_KEY = S3Connection(os.environ['API_KEY'])
 
 print ("bot started")
 
