@@ -1,4 +1,4 @@
 cryptography==37.0.2
 requests==2.25.1
 pyTelegramBotAPI==3.7.9
-boto3==1.24.48
+boto==2.49.0
