@@ -1,14 +1,14 @@
 from cryptography.fernet import Fernet
-from boto.s3.connection import S3Connection
-import os
 import telebot
+from flask import Flask, request
+import os
 
-
-API_KEY = S3Connection(os.environ['API_KEY'])
+API_KEY = os.environ.get('API_KEY')
 
 print ("bot started")
 
 bot = telebot.TeleBot(API_KEY, parse_mode=None)
+server = Flask(__name__)
 
 wlctext = """
 Hello !
@@ -110,4 +110,20 @@ def send_welcome(message):
              bot.send_message(msge.chat.id, "plz send valid text!")
 
 
-bot.infinity_polling()
+@server.route('/' + API_KEY, methods=['POST'])
+def getMessage():
+    json_string = request.get_data().decode('utf-8')
+    update = telebot.types.Update.de_json(json_string)
+    bot.process_new_updates([update])
+    return "!", 200
+
+
+@server.route("/")
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url='https://secretext.herokuapp.com/' + API_KEY)
+    return "!", 200
+
+
+if __name__ == "__main__":
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
