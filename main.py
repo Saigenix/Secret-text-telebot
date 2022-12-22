@@ -121,7 +121,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://secretext.herokuapp.com/' + API_KEY)
+    bot.set_webhook(url='https://web-production-279f.up.railway.app/' + API_KEY)
     return "!", 200
 
 
